@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const INIT_FORM = {
   nombre: "",
-  edad: 0,
+  edad: "",
   direccion: "",
   telefono: "",
   clase: "",
@@ -84,12 +84,18 @@ export default function useForm() {
       "w-full p-3 border rounded-lg border-gray-300 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100";
 
     const isInvalid = validator(formData[field]);
-    if (isInvalid)
-      return (
-        baseClase + " border-red-500 bg-red-50 focus:ring-2 focus:ring-red-200"
-      );
-    else {
+    if (formData[field].length === 0) {
       return baseClase;
+    } else if (isInvalid) {
+      return (
+        baseClase +
+        " border-red-500 bg-red-50 focus:ring-2 focus:ring-red-200 focus:ring-red-100"
+      );
+    } else {
+      return (
+        baseClase +
+        " border-green-500 bg-green-50 focus:ring-2 focus:ring-green-200 focus:ring-green-100"
+      );
     }
   }
 
